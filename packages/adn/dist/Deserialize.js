@@ -33,11 +33,20 @@ function deserializeArray(tokenizer) {
 function deserializeEntityID(tokenizer, value) {
     return value.value;
 }
+function deserializeMap(tokenizer, value) {
+    let entries = [];
+    let peek = tokenizer.peek();
+    while (peek.type !== 'NULLBYTE') {
+        entries.push([deserializeNextValue(tokenizer), deserializeNextValue(tokenizer)]);
+        peek = tokenizer.peek();
+    }
+    return new Map(entries);
+}
 const deserializers = {
     'ARRAY': deserializeArray,
     'OBJECT': deserializeObject,
     'ENTITYID': deserializeEntityID,
-    'MAP': () => { throw new Error('Could not serialize: MAP'); },
+    'MAP': deserializeMap,
     'SET': () => { throw new Error('Could not serialize: SET'); },
     'EOF': () => { throw new Error('Could not serialize: EOF'); },
     'FALSE': () => false,

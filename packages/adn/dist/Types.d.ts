@@ -15,8 +15,11 @@ export declare enum DataTypes {
     ESCAPECHAR = "\v"
 }
 export declare type DataTypeKeys = keyof typeof DataTypes;
-export declare type Token = ObjectToken | ValueToken | EOFToken | NullByteToken;
+export declare type Token = ObjectToken | ValueToken | EOFToken | NullByteToken | MapToken;
 export declare type ValueToken = StringToken | NumberToken | NullToken | EntityIDToken;
+export declare type MapToken = {
+    type: 'MAP';
+};
 export declare type ObjectToken = {
     type: 'OBJECT';
 };

@@ -57,6 +57,7 @@ class Tokenizer {
             case Types_1.DataTypes.ENTITYID: return readEntityID();
             case Types_1.DataTypes.NULLBYTE: return { type: 'NULLBYTE' };
             case Types_1.DataTypes.NUMBER: return readNumber();
+            case Types_1.DataTypes.MAP: return { type: 'MAP' };
             case Types_1.DataTypes.EOF: return { type: 'EOF' };
             default:
                 throw new Error('This should never be reached');

@@ -30,7 +30,7 @@ console.log(deserialize(serialize(obj)))
 - [ ] docs
 - [ ] addon system
 - [ ] date representation
-- [ ] map
+- [x] map
 - [ ] set
 
 ## Contribution

@@ -26,6 +26,7 @@ export type Token = ObjectToken
     | ValueToken
     | EOFToken
     | NullByteToken
+    | MapToken
 
 export type ValueToken = StringToken
     | NumberToken
@@ -33,6 +34,10 @@ export type ValueToken = StringToken
     | EntityIDToken
 
 // Tokens
+
+export type MapToken = {
+    type: 'MAP'
+}
 
 export type ObjectToken = {
     type: 'OBJECT'

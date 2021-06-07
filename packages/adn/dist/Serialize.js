@@ -18,12 +18,12 @@ function getType(value) {
         return 'ARRAY';
     if (value instanceof EntityID_1.EntityID)
         return 'ENTITYID';
-    if (typeof value === 'object' && value !== null)
-        return 'OBJECT';
     if (value instanceof Map)
         return 'MAP';
     if (value instanceof Set)
         return 'SET';
+    if (typeof value === 'object' && value !== null)
+        return 'OBJECT';
     throw new Error(`Could not serialise value x${utils_1.toHex(value)}`);
 }
 function serializeArray(array) {
@@ -38,11 +38,19 @@ function serialiseObject(obj) {
 function serializeEntityID(value) {
     return Types_1.DataTypes.ENTITYID + value.toString() + Types_1.DataTypes.NULLBYTE;
 }
+function serializeMap(value) {
+    let str = Types_1.DataTypes.MAP;
+    let entries = value.entries();
+    for (let [key, value] of entries) {
+        str += serializeValue(key) + serializeValue(value);
+    }
+    return str + Types_1.DataTypes.NULLBYTE;
+}
 const serializers = {
     'ARRAY': serializeArray,
     'OBJECT': serialiseObject,
     'ENTITYID': serializeEntityID,
-    'MAP': () => { throw new Error('Could not serialize: MAP'); },
+    'MAP': serializeMap,
     'SET': () => { throw new Error('Could not serialize: SET'); },
     'EOF': () => Types_1.DataTypes.EOF,
     'FALSE': () => Types_1.DataTypes.FALSE,

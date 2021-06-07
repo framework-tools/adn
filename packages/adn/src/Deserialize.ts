@@ -41,11 +41,22 @@ function deserializeEntityID (tokenizer: Tokenizer, value: Token) {
     return (value as EntityIDToken).value
 }
 
+function deserializeMap(tokenizer: Tokenizer, value: Token) {
+    let entries: [any, any][] = []
+    let peek = tokenizer.peek()
+    while(peek.type !== 'NULLBYTE') {
+        entries.push([deserializeNextValue(tokenizer), deserializeNextValue(tokenizer)])
+        peek = tokenizer.peek()
+    }
+
+    return new Map(entries)
+}
+
 const deserializers: { [key in DataTypeKeys]: (tokenizer: Tokenizer, value: Token) => any } = {
     'ARRAY': deserializeArray,
     'OBJECT': deserializeObject,
     'ENTITYID': deserializeEntityID,
-    'MAP': () => { throw new Error('Could not serialize: MAP') }, //TODO
+    'MAP': deserializeMap,
     'SET': () => { throw new Error('Could not serialize: SET') }, //TODO
     'EOF': () => { throw new Error('Could not serialize: EOF') }, //TODO
     'FALSE': () => false,

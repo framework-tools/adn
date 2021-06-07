@@ -55,6 +55,8 @@ export class Tokenizer {
                 value: parseInt(read_until(is_not_nullbyte), 16)
             }
         }
+
+
         let ch = inputStream.next()
         switch (ch) {
             case DataTypes.OBJECT: return readObject()
@@ -62,6 +64,7 @@ export class Tokenizer {
             case DataTypes.ENTITYID: return readEntityID()
             case DataTypes.NULLBYTE: return { type: 'NULLBYTE' }
             case DataTypes.NUMBER: return readNumber()
+            case DataTypes.MAP: return { type: 'MAP' }
             case DataTypes.EOF: return { type: 'EOF' }
             default:
                 throw new Error('This should never be reached')
