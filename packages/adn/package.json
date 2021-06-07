@@ -1,6 +1,6 @@
 {
   "name": "@framework-tools/adn",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "",
   "type": "commonjs",
   "main": "dist/index",
