@@ -19,5 +19,8 @@
     },
     "engines": {
         "npm": ">=7"
+    },
+    "publishConfig": {
+        "access": "public"
     }
 }
