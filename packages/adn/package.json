@@ -5,6 +5,10 @@
   "type": "commonjs",
   "main": "dist/index",
   "types": "dist/index",
+  "exports": {
+    ".": "./dist/index.js",
+    "./": "./dist/"
+  },
   "dependencies": {
     "@rollup/plugin-typescript": "^8.2.1",
     "@types/node": "^15.9.0",
