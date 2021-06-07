@@ -1,0 +1,25 @@
+{
+  "name": "@framework-tools/adn",
+  "version": "1.0.1",
+  "description": "",
+  "type": "commonjs",
+  "main": "dist/index",
+  "types": "dist/index",
+  "dependencies": {
+    "@rollup/plugin-typescript": "^8.2.1",
+    "@types/node": "^15.9.0",
+    "bson-objectid": "^2.0.1",
+    "tslib": "^2.2.0",
+    "typescript": "^4.3.2"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "rimraf -rf ./dist",
+    "watch": "tsc -w",
+    "compile": "tsc",
+    "prepublishOnly": "npm run compile",
+    "test": "npm run build"
+  },
+  "author": "",
+  "license": "MIT"
+}
